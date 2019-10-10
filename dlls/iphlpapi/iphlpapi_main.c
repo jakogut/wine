@@ -2755,10 +2755,11 @@ DWORD WINAPI NotifyAddrChange(PHANDLE Handle, LPOVERLAPPED overlapped)
 DWORD WINAPI NotifyIpInterfaceChange(ADDRESS_FAMILY family, PIPINTERFACE_CHANGE_CALLBACK callback,
                                      PVOID context, BOOLEAN init_notify, PHANDLE handle)
 {
-    FIXME("(family %d, callback %p, context %p, init_notify %d, handle %p): stub\n",
+    TRACE("(family %d, callback %p, context %p, init_notify %d, handle %p): stub\n",
           family, callback, context, init_notify, handle);
-    if (handle) *handle = NULL;
-    return ERROR_NOT_SUPPORTED;
+    callback(context, NULL, MibInitialNotification);
+    if (handle) *handle = 1;
+    return NO_ERROR;
 }
 
 
